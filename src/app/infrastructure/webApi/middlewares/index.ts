@@ -8,6 +8,7 @@ export const cardValidate = async (req: Request, res: Response, next: NextFuncti
         .notEmpty()
         .isLength({
             min: 16,
+            max: 16
         })
         .withMessage({
             message: "CardNumber Invalid",

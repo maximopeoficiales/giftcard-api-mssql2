@@ -12,8 +12,10 @@ export class GiftcardController {
       // console.log(this);
       let { cardNumber } = req.params;
       let response = await updateGiftcardService.searchGiftcard(parseInt(cardNumber));
-
-      return res.status(200).json(response);
+      if (response.statusQuery) {
+        return res.status(HttpStatusCode.OK).json(response);
+      }
+      return res.status(HttpStatusCode.NOT_FOUND).json(response);
 
     } catch (error) {
       console.log(error);
@@ -31,7 +33,10 @@ export class GiftcardController {
     try {
       let { cardNumber, amountOrder } = req.body;
       let response = await updateGiftcardService.updateGiftcard(cardNumber, amountOrder);
-      return res.json(response);
+      if (response.statusQuery) {
+        return res.status(HttpStatusCode.OK).json(response);
+      }
+      return res.status(HttpStatusCode.NOT_FOUND).json(response);
 
     } catch (error) {
       console.log(error);

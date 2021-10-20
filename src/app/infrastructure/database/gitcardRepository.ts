@@ -41,22 +41,32 @@ export class GiftcardRepository {
 
     async updateGiftcard(numberGiftcard: number, amount: number): Promise<UpdateGifcardBalanceResponse> {
         let ctx = await this.getConn();
-        let updatedSuccess = await ctx.query(`update giftcard.Giftcards set netAmount = ${amount} where number = ${numberGiftcard} and status = 'AC' `);
-        // console.log(updatedSuccess);
+        let giftcardFind = await this.searchGiftcard(numberGiftcard);
+        if (giftcardFind.statusQuery) {
+            let updatedSuccess = await ctx.query(`update giftcard.Giftcards set netAmount = ${amount} where number = ${numberGiftcard} and status = 'AC' `);
+            // console.log(updatedSuccess);
 
-        if (updatedSuccess) {
-            let giftcard = await this.searchGiftcard(numberGiftcard);
-            if (giftcard.cardNumber) {
-                // falta parsear al objeto respectivo 
-                let outputBalace: UpdateGifcardBalanceResponse = {
-                    cardBalance: giftcard.cardBalance,
-                    dateUpdated: getCurrentDateFormat(),
-                    statusQuery: true,
-                    error: null
-                };
-                return outputBalace;
+            if (updatedSuccess) {
+                let giftcard = await this.searchGiftcard(numberGiftcard);
+                if (giftcard.cardNumber) {
+                    // falta parsear al objeto respectivo 
+                    let outputBalace: UpdateGifcardBalanceResponse = {
+                        cardBalance: giftcard.cardBalance,
+                        dateUpdated: getCurrentDateFormat(),
+                        statusQuery: true,
+                        error: null
+                    };
+                    return outputBalace;
+                }
+            }
+            return {
+                cardBalance: null,
+                dateUpdated: getCurrentDateFormat(),
+                statusQuery: false,
+                error: "Giftcard not updated"
             }
         }
+
         return {
             cardBalance: null,
             dateUpdated: getCurrentDateFormat(),
