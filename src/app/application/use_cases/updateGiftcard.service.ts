@@ -14,7 +14,7 @@ export class UpdateGiftcardService {
         //     cardBalance: 222,
         //     cardNumber: numberGiftcard.toString(),
         //     output: "output",
-        //     statusCard: "true",
+        //     statusCard: true,
         //     statusQuery: "query"
         // };
     }

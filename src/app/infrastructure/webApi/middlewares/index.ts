@@ -18,7 +18,7 @@ export const cardValidate = async (req: Request, res: Response, next: NextFuncti
     const errors = validationResult(req);
     const arrayErr = errors.array();
     if (!errors.isEmpty()) {
-        console.log(arrayErr);
+        // console.log(arrayErr);
         return res.status(400).json({
             status: "false",
             errorCode: arrayErr[arrayErr.length - 1].msg.errorCode,
@@ -57,7 +57,7 @@ export const cardUpdateValidate = async (req: Request, res: Response, next: Next
     const errors = validationResult(req);
     const arrayErr = errors.array();
     if (!errors.isEmpty()) {
-        console.log(arrayErr);
+        // console.log(arrayErr);
         return res.status(400).json({
             status: "false",
             errorCode: arrayErr[arrayErr.length - 1].msg.errorCode,

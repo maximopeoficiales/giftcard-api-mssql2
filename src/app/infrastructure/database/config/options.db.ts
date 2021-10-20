@@ -1,6 +1,6 @@
 import { mssqlConfiguration } from "../../../../config";
-
-export const sqlConfig = {
+import mssql from 'mssql'
+export const sqlConfig: mssql.config = {
     user: mssqlConfiguration.user,
     password: mssqlConfiguration.password,
     database: mssqlConfiguration.database,
@@ -11,7 +11,8 @@ export const sqlConfig = {
         idleTimeoutMillis: 30000
     },
     options: {
-        encrypt: true, // for azure
-        trustServerCertificate: false // change to true for local dev / self-signed certs
+        encrypt: false, // for azure
+        trustServerCertificate: false, // change to true for local dev / self-signed certs
+        trustedConnection: false
     }
 }

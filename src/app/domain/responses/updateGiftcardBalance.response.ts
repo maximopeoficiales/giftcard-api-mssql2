@@ -1,5 +1,6 @@
 export class UpdateGifcardBalanceResponse {
-    statusQuery: string;
+    statusQuery: boolean;
     dateUpdated: string;
-    cardBalance: number
+    cardBalance: number;
+    error: string;
 }

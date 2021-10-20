@@ -1,7 +1,7 @@
 export class StatusGiftcardResponse {
-    output: string;
     cardNumber: string;
-    statusQuery: string;
-    statusCard: boolean;
+    statusQuery: boolean;
+    statusCard: string;
     cardBalance: number;
+    error?: string;
 }
